@@ -1,30 +1,50 @@
-console.log("I love git")
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
 
-const headerTitle = document.getElementById('header-title')
-const title1 = document.getElementsByClassName('title')
-// const items = document.getElementsByClassName('list-group-item')
-const items = document.querySelectorAll('.list-group-item')
-const secondItem = document.querySelector('.list-group-item:nth-child(2)')
-const thirdItem = document.querySelector('.list-group-item:nth-child(3)')
-const li = document.getElementsByTagName('li')
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+// Filter event
+// filter.addEventListener('keyup', filterItems);
 
-headerTitle.style.borderBottom = 'solid 3px black'
-title1[0].style.fontWeight = 'bold'
-title1[0].style.color = 'green'
+// Add item
+function addItem(e){
+  e.preventDefault();
 
-items[1].style.color = 'green'
+  // Get input value
+  var newItem = document.getElementById('item').value;
 
-secondItem.style.backgroundColor = 'green';
-thirdItem.style.visibility = 'hidden';
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
 
-for (let i = 0; i < items.length; i++) {
-//    items[i].style.fontWeight = 'bold'
-//    li[i].style.backgroundColor = '#f4f4f4'
+  // Create del button element
+  var deleteBtn = document.createElement('button');
 
-   if (i % 2 !== 0) {
-        items[i].style.backgroundColor = 'green'
-   } 
-    
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
+
+  // Append button to li
+  li.appendChild(deleteBtn);
+
+  // Append li to list
+  itemList.appendChild(li);
 }
 
-
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
