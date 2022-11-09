@@ -17,6 +17,7 @@
     padding: 5px;
     background: #f4f4f4;
     margin: 5px 0;
+ 
   }
   
   header {
@@ -50,8 +51,6 @@
   }
   
   .btn {
-    display: block;
-    width: 100%;
     padding: 10px 15px;
     border: 0;
     background: #333;
@@ -59,9 +58,15 @@
     border-radius: 5px;
     margin: 5px 0;
   }
-  
+   .delete {
+    background-color: crimson;
+    margin-inline: .5rem;
+  }
+  .edit {
+    background-color: green;
+  }
   .btn:hover {
-    background: #444;
+    opacity: 0.8;
   }
   
   .bg-dark {
