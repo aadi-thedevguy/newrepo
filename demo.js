@@ -2,6 +2,7 @@ var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var filter = document.getElementById('filter');
 
+
 // Form submit event
 form.addEventListener('submit', addItem);
 // Delete event
@@ -16,6 +17,9 @@ function addItem(e){
   // Get input value
   var newItem = document.getElementById('item').value;
   var description = document.getElementById('description').value;
+
+  localStorage.setItem('item',newItem)
+  localStorage.setItem('description',description)
 
   // Create new li element
   var li = document.createElement('li');
