@@ -1,4 +1,4 @@
-// // Put DOM elements into variables
+  // Put DOM elements into variables
 // const myForm = document.querySelector('#my-form');
 // const descriptionInput = document.querySelector('#description');
 // const amountInput = document.querySelector('#amount');
@@ -55,6 +55,7 @@
 //   deleteItem(amount)
 // }
 
+
 const posts = [
 
   {
@@ -85,7 +86,7 @@ function getPosts() {
           output += `<li>${post.title} </li>`
 
       })
-  
+
       document.body.innerHTML = output
 
   }, 1000)
@@ -94,9 +95,9 @@ function getPosts() {
 
 
 
-function createPost(post) {
+async function createPost(post) {
 
- return new Promise((resolve,reject) => {
+ const createdPost = new Promise((resolve,reject) => {
   setTimeout(() => {
       posts.push(post)
       const error = false
@@ -108,9 +109,12 @@ function createPost(post) {
   }, 2000)
  })
 
+ let newPost = await createdPost
+ return newPost
+
 }
-function deletePost() {
-  return new Promise((resolve,reject) => {  
+async function deletePost() {
+  const promise = new Promise((resolve,reject) => {  
       setTimeout(() => { 
         if (posts.length == 0) {
           reject('All Posts are Deleted')
@@ -120,14 +124,17 @@ function deletePost() {
       }
   }, 5000) 
   })
+
+  let remainingPosts = await promise
+  return remainingPosts
 }
 
 createPost({title : 'Post Three',body : 'This is post three'}).then(getPosts).catch(err => console.log(err))
 createPost({title : 'Post Four',body : 'This is post four'}).then(deletePost).then(getPosts).catch(err => console.log(err))
 
-// deletePost().then(getPosts).catch(err => console.log(err))
-// deletePost().then(getPosts).catch(err => console.log(err))
-// deletePost().then(getPosts).catch(err => console.log(err))
+deletePost().then(getPosts).catch(err => console.log(err))
+deletePost().then(getPosts).catch(err => console.log(err))
+deletePost().then(getPosts).catch(err => console.log(err))
 
 // const promise1 = Promise.resolve('Hello world')
 // const promise2 = 10
@@ -135,16 +142,17 @@ createPost({title : 'Post Four',body : 'This is post four'}).then(deletePost).th
 
 // Promise.all([promise1,promise2,promise3]).then(values => console.log(values))
 
-let userActivityTime = new Date()
-console.log(userActivityTime)
+// let userActivityTime = new Date()
+// console.log(userActivityTime)
 
-function updateLastUserActivityTime() {
-  return new Promise((resolve,reject) => setTimeout(() => {
-    userActivityTime += new Date()
-    console.log(userActivityTime)
-    resolve()
-  },3000)
-  )
-} 
+// function updateLastUserActivityTime() {
+//   return new Promise((resolve,reject) => setTimeout(() => {
+//     userActivityTime += new Date()
+//     console.log(userActivityTime)
+//     resolve()
+//   },3000)
+//   )
+// } 
 
-Promise.all([createPost({title : 'Post Five',body : 'This is post Five'}), updateLastUserActivityTime]).then(() => console.log(posts)).then(deletePost)
+// Promise.all([createPost({title : 'Post Five',body : 'This is post Five'}), updateLastUserActivityTime]).then(() => console.log(posts)).then(deletePost)
+
